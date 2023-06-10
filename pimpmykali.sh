@@ -1,12 +1,11 @@
 #!/bin/bash
 #
 # pimpmykali.sh  Author: Dewalt
-# git clone https://github.com/Dewalt-arch/pimpmykali 
+#                Dirty motherFORKer: TrshPuppy
+# git clone https://github.com/TrshPuppy/pimpmykali-autopilot.git
 # Usage: sudo ./pimpmykali.sh  ( defaults to the menu system )
 # command line arguments are valid, only catching 1 arguement
 #
-# Full Revision history can be found in changelog.txt
-# Standard Disclaimer: Author assumes no liability for any damage
 
 # revision var
     revision="1.7.0"  
@@ -103,6 +102,9 @@
 
 # 02.02.21 - rev 1.1.8 - fix_xfce_root fix_xfce_user fix_xfcepower external configuration file
     raw_xfce="https://raw.githubusercontent.com/Dewalt-arch/pimpmyi3-config/main/xfce4/xfce4-power-manager.xml"
+
+# Some trash:
+    hashimoto_root=false
 
 check_distro() {
     distro=$(uname -a | grep -i -c "kali") # distro check
@@ -1707,6 +1709,9 @@ pimpmykali_menu() {
     echo -e "                               (sources.list, linux-headers, vm-video)"                # -
     echo -e "  0 - Fix ONLY 1 thru 8        (runs only 1 thru 8) \n"                                # fix_all
     echo -e "  "$bold"N - NEW VM SETUP"$reset" - Run this option if this is the first time running pimpmykali\n"
+     # TrshP wants to automate this, and make sensei #as#imoto proud:
+    echo -e " "$bold"# - AUTOMATE NEW VM SETUP w/o ROOT"$reset" - New VM setup but WITHOUT enabling root login"
+    echo -e "  "$bold"#R - AUTOMATE NEW VM SETUP w/ ROOT"$reset" - New VM setup & enable root login (choose wisely)\n" 
     echo -e "  = - Pimpmykali-Mirrors       (find fastest kali mirror. use the equals symbol = )"   # get_mirrorlist; best_ping; small_speedtest; large_speedtest; gen_new_sources; cleanup;;
     echo -e "  T - Reconfigure Timezone      current timezone  : $(cat /etc/timezone)"              # reconfig_timekey
     echo -e "  K - Reconfigure Keyboard      current keyb/lang : $(cat /etc/default/keyboard | grep XKBLAYOUT | cut -d "\"" -f2)\n" # reconfig_keyboard
@@ -1728,7 +1733,10 @@ pimpmykali_menu() {
     echo -e "  ! - Nuke Impacket            (Type the ! character for this menu item)"            # fix_sead_warning
     echo -e "  @ - Install Nessus           (Type the @ character for this menu item)"            # install_nessus
     echo -e "  $ - Nuke Nessus              (Type the $ character for this menu item)\n"            # remove_nessus
-    read -n1 -p "  Press key for menu item selection or press X to exit: " menuinput
+    # This is nice, but #as#imoto says we can do better...
+    #read -n1 -p "  Press key for menu item selection or press X to exit: " menuinput
+    read -p " Press key/ keypair for menu item selection or press X to exit: " menuinput
+
 
     case $menuinput in
         1) fix_missing;;
@@ -1765,8 +1773,27 @@ pimpmykali_menu() {
         $) remove_nessus;;
         %) fix_waybackurls;;
         *) pimpmykali_menu ;;
+       \#) hashimoto_time;;
+       \#R) hashimoto_time_spicy;;
     esac
     }
+
+
+# Let's plop our trash right here:
+hashimoto_time(){
+  hashimoto_root=false
+
+  fix_all
+  fix_upgrade
+}
+
+hashimoto_time_spicy(){
+  hashimoto_root=true
+
+  fix_all
+  fix_upgrade
+}
+
 
 pimpmykali_help() {
     # do not edit this echo statement, spacing has been fixed and is correct for display in the terminal
