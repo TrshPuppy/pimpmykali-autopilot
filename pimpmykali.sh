@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# pimpmykali.sh  Author: Dewalt
+# pimpmykali.sh              Author: Dewalt
 #                Dirty motherFORKer: TrshPuppy
 # git clone https://github.com/TrshPuppy/pimpmykali-autopilot.git
 # Usage: sudo ./pimpmykali.sh  ( defaults to the menu system )
@@ -43,9 +43,9 @@
     color_white='\e[1;37m'
 
 # nuke impacket function launch_code generator
-    # launch_codes_alpha=$(echo $((1 + RANDOM % 9999)))
-    # launch_codes_beta=$(echo $((1 + RANDOM % 9999)))
-    # launch_codes_charlie=$(echo $((1 + RANDOM % 9999)))
+    launch_codes_alpha=$(echo $((1 + RANDOM % 9999)))
+    launch_codes_beta=$(echo $((1 + RANDOM % 9999)))
+    launch_codes_charlie=$(echo $((1 + RANDOM % 9999)))
 
 # status indicators
     greenplus='\e[1;33m[++]\e[0m'
@@ -57,51 +57,51 @@
     fourblinkexclaim='\e[1;31m[\e[5;31m!!!!\e[0m\e[1;31m]\e[0m'
 
 # variables needed in the script
-    # # wait_time=10  # 2nd warning screen wait time (disabled)
-    # force=0
-    # check=""
-    # section=""
-    # type=""
-    # menu=""
-    # pipnowarn="--no-python-version-warning"  # turn off all python2.7 deprecation warnings in pip
-    # export PYTHONWARNINGS="ignore"
-    # # look at a method to find the current version of nessus should the version number change
-    # nessus_amd64="https://www.tenable.com/downloads/api/v2/pages/nessus/files/Nessus-10.5.2-debian10_amd64.deb"
-    # nessus_arm64="https://www.tenable.com/downloads/api/v2/pages/nessus/files/Nessus-10.5.2-ubuntu1804_aarch64.deb"
-    # nessusd_service_active=0
+    # wait_time=10  # 2nd warning screen wait time (disabled)
+    force=0
+    check=""
+    section=""
+    type=""
+    menu=""
+    pipnowarn="--no-python-version-warning"  # turn off all python2.7 deprecation warnings in pip
+    export PYTHONWARNINGS="ignore"
+    # look at a method to find the current version of nessus should the version number change
+    nessus_amd64="https://www.tenable.com/downloads/api/v2/pages/nessus/files/Nessus-10.5.2-debian10_amd64.deb"
+    nessus_arm64="https://www.tenable.com/downloads/api/v2/pages/nessus/files/Nessus-10.5.2-ubuntu1804_aarch64.deb"
+    nessusd_service_active=0
 
 # variables moved from local to global
-    # finduser=$(logname)
-    # detected_env=""
+    finduser=$(logname)
+    detected_env=""
    
-    # pyver=$(python3 --version | awk '{print$2}' | cut -d "." -f1-2)
+    pyver=$(python3 --version | awk '{print$2}' | cut -d "." -f1-2)
    
-    # archtype=$(uname -m)
-    # if [ "$archtype" == "aarch64" ]; 
-    #   then 
-    #     arch="arm64"
-    # fi
+    archtype=$(uname -m)
+    if [ "$archtype" == "aarch64" ]; 
+      then 
+        arch="arm64"
+    fi
 
-    # if [ "$archtype" == "x86_64" ]; 
-    #   then
-    #     arch="amd64"
-    # fi
+    if [ "$archtype" == "x86_64" ]; 
+      then
+        arch="amd64"
+    fi
 
 # for vbox_fix_shared_folder_permission_denied
-    # findgroup=$(groups $finduser | grep -i -c "vboxsf")
+    findgroup=$(groups $finduser | grep -i -c "vboxsf")
 
 # Logging
-    # LOG_FILE=pimpmykali.log
-    # exec > >(tee ${LOG_FILE}) 2>&1
+    LOG_FILE=pimpmykali.log
+    exec > >(tee ${LOG_FILE}) 2>&1
 
 # silent mode
-    # silent=''                  # uncomment to see all output
-    # # silent='>/dev/null 2>&1' # uncomment to hide all output10
-    # export DEBIAN_FRONTEND=noninteractive
-    # export PYTHONWARNINGS=ignore
+    silent=''                  # uncomment to see all output
+    # silent='>/dev/null 2>&1' # uncomment to hide all output10
+    export DEBIAN_FRONTEND=noninteractive
+    export PYTHONWARNINGS=ignore
 
 # 02.02.21 - rev 1.1.8 - fix_xfce_root fix_xfce_user fix_xfcepower external configuration file
-    # raw_xfce="https://raw.githubusercontent.com/Dewalt-arch/pimpmyi3-config/main/xfce4/xfce4-power-manager.xml"
+    raw_xfce="https://raw.githubusercontent.com/Dewalt-arch/pimpmyi3-config/main/xfce4/xfce4-power-manager.xml"
 
 # Some trash:
     hashimoto_on=false
@@ -110,9 +110,8 @@
 hashimoto_time(){
   hashimoto_on=true
   echo "I see you've chosen vanilla #-chan"
-  echo "hashiroot = $hashimoto_root"
   fix_all
- # fix_upgrade
+  fix_upgrade
 }
 
 hashimoto_time_spicy(){
@@ -120,15 +119,14 @@ hashimoto_time_spicy(){
   hashimoto_root=true
   echo "I see you've chosen spicey #-chan"
   fix_all
- # fix_upgrade
 }
 
-# check_distro() {
-#     distro=$(uname -a | grep -i -c "kali") # distro check
-#     if [ $distro -ne 1 ]
-#      then echo -e "\n $blinkexclaim Kali Linux Not Detected - WSL/WSL2/Anything else is unsupported $blinkexclaim \n"; exit
-#     fi
-#   }
+check_distro() {
+    distro=$(uname -a | grep -i -c "kali") # distro check
+    if [ $distro -ne 1 ]
+     then echo -e "\n $blinkexclaim Kali Linux Not Detected - WSL/WSL2/Anything else is unsupported $blinkexclaim \n"; exit
+    fi
+  }
 
 check_for_root() {
     if [ "$EUID" -ne 0 ]
@@ -236,19 +234,19 @@ fix_missing() {
     }
 
 fix_all() {
-    #fix_missing   $force
-    #apt_autoremove && apt_autoremove_complete 
-    #apt_fixbroken && apt_fixbroken_complete 
+    fix_missing   $force
+    apt_autoremove && apt_autoremove_complete 
+    apt_fixbroken && apt_fixbroken_complete 
     make_rootgreatagain $force
-    #seclists
-    #fix_flameshot $force
-    #fix_grub
-    #fix_smbconf
-    #fix_impacket # - restored after changes made in 1.6.9
-    # ID10T REMINDER: DONT CALL THESE HERE THEY ARE IN FIX_MISSING!
-    # python-pip-curl python3_pip fix_golang fix_nmap
-    # fix_upgrade is not a part of fix_missing and only
-    # called as sub-function call of fix_all or fix_upgrade itself
+    seclists
+    fix_flameshot $force
+    fix_grub
+    fix_smbconf
+    fix_impacket # - restored after changes made in 1.6.9
+ #  ID10T REMINDER: DONT CALL THESE HERE THEY ARE IN FIX_MISSING!
+ #  python-pip-curl python3_pip fix_golang fix_nmap
+ #  fix_upgrade is not a part of fix_missing and only
+ #  called as sub-function call of fix_all or fix_upgrade itself
     }
 
 fix_kali_lightdm_theme_and_background () {
@@ -878,30 +876,28 @@ make_rootgreatagain() {
   if $hashimoto_on
   then
     case $hashimoto_root in
-      "true") echo "make_root_great hashi on, hashiroot true";;
-      "false") echo "make root great hashi on hashiroot false";;
-    #  true)   enable_rootlogin $force                              ;;
-    #  false)  echo -e "\n\n $redexclaim skipping root login setup" ;;
+     "true")   enable_rootlogin $force                              ;;
+     "false")  echo -e "\n\n $redexclaim skipping root login setup" ;;
     esac
   else
   echo "make root great hashi off"
-    # echo -e "\n\n KALI-ROOT-LOGIN INSTALLATION: - PAGE 1   "$red"*** READ CAREFULLY! ***"$white" \n"
-    # echo -e "   On Kali 2019.x and prior the default user was root"
-    # echo -e "   On Kali 2020.1 and newer this was changed, the default user was changed to be "
-    # echo -e "   an" $yellow$bold"actual user"$norm$white" on the system and not "$red$bold"root"$norm$white", this user is : kali (by default) "
-    # echo -e "\n   Press Y - If you wish to re-enable the ability to login as root and be root all the time"
-    # echo -e "     If you choose Yes - a second screen will prompt you to copy all of /home/$finduser to /root"
-    # echo -e "     as there is nothing in the /root directory by default"
-    # echo -e "\n   Press N - The script will skip this section, and not re-enable the login as root function"
-    # echo -e "\n   "$bold$red"If you are confused or dont understand what"$norm$white
-    # echo -e "   "$bold$red"this part of the script is doing, press N"$norm$white
-    # echo -e "\n   Do you want to re-enable the ability to login as root in kali?"
-    # read -n1 -p "   Please type Y or N : " userinput
-    # case $userinput in
-    #     y|Y) enable_rootlogin $force;;
-    #     n|N) echo -e "\n\n $redexclaim skipping root login setup" ;;
-    #     *) echo -e "\n invalid key try again Y or N"; make_rootgreatagain;;
-    # esac
+    echo -e "\n\n KALI-ROOT-LOGIN INSTALLATION: - PAGE 1   "$red"*** READ CAREFULLY! ***"$white" \n"
+    echo -e "   On Kali 2019.x and prior the default user was root"
+    echo -e "   On Kali 2020.1 and newer this was changed, the default user was changed to be "
+    echo -e "   an" $yellow$bold"actual user"$norm$white" on the system and not "$red$bold"root"$norm$white", this user is : kali (by default) "
+    echo -e "\n   Press Y - If you wish to re-enable the ability to login as root and be root all the time"
+    echo -e "     If you choose Yes - a second screen will prompt you to copy all of /home/$finduser to /root"
+    echo -e "     as there is nothing in the /root directory by default"
+    echo -e "\n   Press N - The script will skip this section, and not re-enable the login as root function"
+    echo -e "\n   "$bold$red"If you are confused or dont understand what"$norm$white
+    echo -e "   "$bold$red"this part of the script is doing, press N"$norm$white
+    echo -e "\n   Do you want to re-enable the ability to login as root in kali?"
+    read -n1 -p "   Please type Y or N : " userinput
+    case $userinput in
+        y|Y) enable_rootlogin $force;;
+        n|N) echo -e "\n\n $redexclaim skipping root login setup" ;;
+        *) echo -e "\n invalid key try again Y or N"; make_rootgreatagain;;
+    esac
   fi    
     }
 
@@ -1619,32 +1615,31 @@ best_ping() {
     }
 
 # /********************************************* TRSHP: I think these are broken....*********************************************|
-# small_speedtest() {
-#   	echo > /tmp/mirrors_speedtest
-#     echo -e "\n  $greenplus Testing top 10 mirrors - small transfer >1MB, select top 5"
+small_speedtest() {
+  	echo > /tmp/mirrors_speedtest
+    echo -e "\n  $greenplus Testing top 10 mirrors - small transfer >1MB, select top 5"
+    for i in $(cat /tmp/kali-ping | sed -r '/^\s*$/d' | sort -n | head -n10 | cut -d ":" -f2); do
+  	  active_mirror=$(cat /tmp/timetest.list | grep "$i" | grep "README" | sed -r '/^\s*$/d')
+  	  active_mirror_display=$(cat /tmp/timetest.list | grep "$i" | grep "README" | cut -d "/" -f3| sed -r '/^\s*$/d')
+  	  get_download=$(curl -s "$active_mirror" --w %{speed_download} -o /dev/null)
+   	  mb_speed=$(($get_download / 1024 / 1024))
+  	  echo "$get_download:$active_mirror:$mb_speed" >> /tmp/mirrors_speedtest
+      echo -e "    $greenplus $active_mirror_display speed: $get_download b/sec"
+  	done
+  	}
 
-#     for i in $(cat /tmp/kali-ping | sed -r '/^\s*$/d' | sort -n | head -n10 | cut -d ":" -f2); do
-#   	  active_mirror=$(cat /tmp/timetest.list | grep "$i" | grep "README" | sed -r '/^\s*$/d')
-#   	  active_mirror_display=$(cat /tmp/timetest.list | grep "$i" | grep "README" | cut -d "/" -f3| sed -r '/^\s*$/d')
-#   	  get_download=$(curl -s "$active_mirror" --w %{speed_download} -o /dev/null)
-#    	  mb_speed=$(($get_download / 1024 / 1024))
-#   	  echo "$get_download:$active_mirror:$mb_speed" >> /tmp/mirrors_speedtest
-#       echo -e "    $greenplus $active_mirror_display speed: $get_download b/sec"
-#   	done
-#     }
-
-# large_speedtest() {
-#   	echo > /tmp/mirrors_speedtest
-#   	echo -e "\n  $greenplus Testing top 5 mirrors from small transfer - large transfer (10MB)"
-#   	for i in $(cat /tmp/kali-ping | sed -r '/^\s*$/d' | sort -n | head -n5 | cut -d ":" -f2); do
-#   	  active_mirror=$(cat /tmp/timetest.list | grep "$i" | grep "README" | sed s:"README":"dists/kali-rolling/Contents-amd64.gz":g | sed -r '/^\s*$/d')
-#   	  active_mirror_display=$(cat /tmp/timetest.list | grep "$i" | grep "README" | cut -d "/" -f3| sed -r '/^\s*$/d')
-#    	  get_download=$(curl --max-time 30 -s -r 0-10485760 "$active_mirror" --w %{speed_download} -o /dev/null)
-#    	  mb_speed=$(($get_download / 1024 / 1024))
-#   	  echo "$get_download:$active_mirror:$mb_speed" >> /tmp/mirrors_speedtest
-#   	  echo -e "    $greenplus $active_mirror_display speed: $get_download b/sec ($mb_speed MB/sec)"
-#   	done
-#   	}
+large_speedtest() {
+  	echo > /tmp/mirrors_speedtest
+  	echo -e "\n  $greenplus Testing top 5 mirrors from small transfer - large transfer (10MB)"
+  	for i in $(cat /tmp/kali-ping | sed -r '/^\s*$/d' | sort -n | head -n5 | cut -d ":" -f2); do
+  	  active_mirror=$(cat /tmp/timetest.list | grep "$i" | grep "README" | sed s:"README":"dists/kali-rolling/Contents-amd64.gz":g | sed -r '/^\s*$/d')
+  	  active_mirror_display=$(cat /tmp/timetest.list | grep "$i" | grep "README" | cut -d "/" -f3| sed -r '/^\s*$/d')
+   	  get_download=$(curl --max-time 30 -s -r 0-10485760 "$active_mirror" --w %{speed_download} -o /dev/null)
+   	  mb_speed=$(($get_download / 1024 / 1024))
+  	  echo "$get_download:$active_mirror:$mb_speed" >> /tmp/mirrors_speedtest
+  	  echo -e "    $greenplus $active_mirror_display speed: $get_download b/sec ($mb_speed MB/sec)"
+  	done
+  	}
 
 gen_new_sources() {
   	i=$(cat /tmp/mirrors_speedtest | sort -n | tail -n1 | cut -d "/" -f3)
@@ -1719,10 +1714,10 @@ p1lEC0auURW3owsQlTZtf4QtGZgjXYKT4inPtI23oEK7wXlyPnd8arKdKE0EPdUnhIf0v+iE2o
 7BgVFVyec3u1OxFw+uRxbvPt8R6+MOpGq5cBAAA="  | gunzip )
 
 pimpmykali_menu() {
-    # DATE=$(date +%x); TIME=$(date +%X)
-   # clear
+  # DATE=$(date +%x); TIME=$(date +%X)
+    clear
     echo -e "$asciiart"
-    echo -e "\n    Select an option from menu:             Rev: $revision Arch: $arch"
+    echo -e "\n    Select an option from menu:                           Rev: $revision Arch: $arch"
 #    echo -e "\n     *** APT UPGRADE WILL ONLY BE CALLED FROM MENU OPTION 9 ***"
 #    echo -e "\n  Menu Options:"                                                                    # function call list
     echo -e "\n Key  Menu Option:             Description:"
@@ -1733,13 +1728,13 @@ pimpmykali_menu() {
     echo -e "   4 - Fix Grub                 (adds mitigations=off)"                                 # fix_grub
     echo -e "   5 - Fix Impacket             (installs impacket 0.9.19)"                             # fix_impacket
     echo -e "   6 - Enable Root Login        (installs kali-root-login)"                             # make_rootgreatagain
-    #echo -e "   7 - Install Waybackrust      (waybackrust installed, symlinked to waybackurls)"      # fix_waybackurls
+  # echo -e "   7 - Install Waybackrust      (waybackrust installed, symlinked to waybackurls)"      # fix_waybackurls
     echo -e "   8 - Fix nmap scripts         (clamav-exec.nse and http-shellshock.nse)"              # fix_nmap
     echo -e "   9 - Pimpmyupgrade            (apt upgrade with vbox/vmware detection)"               # only_upgrade
-    echo -e "                               (sources.list, linux-headers, vm-video)"                # -
+    echo -e "                               (sources.list, linux-headers, vm-video)"                 # -
     echo -e "   0 - Fix ONLY 1 thru 8        (runs only 1 thru 8) \n"                                # fix_all
     echo -e "   "$bold"N - NEW VM SETUP"$reset" - Run this option if this is the first time running pimpmykali\n"
-     # TrshP wants to automate this, and make sensei #as#imoto proud:
+  # TrshP wants to automate this, and make sensei #as#imoto proud:
     echo -e "  "$bold"#  - AUTOMATE NEW VM SETUP w/o ROOT"$reset" - New VM setup but WITHOUT enabling root login"
     echo -e "  "$bold"#R - AUTOMATE NEW VM SETUP w/ ROOT"$reset"  - New VM setup & enable root login (choose wisely)\n" 
     echo -e "   = - Pimpmykali-Mirrors       (find fastest kali mirror. use the equals symbol = )"   # get_mirrorlist; best_ping; small_speedtest; large_speedtest; gen_new_sources; cleanup;;
@@ -1760,13 +1755,12 @@ pimpmykali_menu() {
     echo -e "   L - Install Sublime Editor   (install the sublime text editor)"                      # install_sublime
     echo -e "   W - Gowitness Precompiled    (download and install gowitness)"                       # fix_gowitness
     echo -e "   V - Install MS-Vscode        (install microsoft vscode only)"                        # install_vscode
-    echo -e "   ! - Nuke Impacket            (Type the ! character for this menu item)"            # fix_sead_warning
-    echo -e "   @ - Install Nessus           (Type the @ character for this menu item)"            # install_nessus
+    echo -e "   ! - Nuke Impacket            (Type the ! character for this menu item)"              # fix_sead_warning
+    echo -e "   @ - Install Nessus           (Type the @ character for this menu item)"              # install_nessus
     echo -e "   $ - Nuke Nessus              (Type the $ character for this menu item)\n"            # remove_nessus
     # This is nice, but #as#imoto says we can do better...
     #read -n1 -p "  Press key for menu item selection or press X to exit: " menuinput
     read -p " Press key/ keypair for menu item selection or press X to exit: " menuinput
-
 
     case $menuinput in
         1) fix_missing                              ;;
@@ -1775,7 +1769,7 @@ pimpmykali_menu() {
         4) fix_grub                                 ;;
         5) fix_impacket                             ;;
         6) make_rootgreatagain                      ;;
-       # 7) fix_waybackurls                         ;;
+      # 7) fix_waybackurls                          ;;
         8) fix_nmap                                 ;;
         9) apt_update;
            fix_libwacom; 
@@ -1785,7 +1779,7 @@ pimpmykali_menu() {
            virt_what; 
            check_vm                                 ;;
         # Needs to be escaped:
-        \!) forced=1; 
+       \!) forced=1; 
             fix_sead_warning                        ;;
       a|A) mapt_prereq                              ;;
       b|B) bpt                                      ;;
@@ -1818,9 +1812,9 @@ pimpmykali_menu() {
       x|X) echo -e "\n\n Exiting pimpmykali.sh 
            - Happy Hacking! \n"                     ;;
         ^) install_everything                       ;;
-        \@) install_nessus                          ;;
-        \$) remove_nessus                           ;;
-        \%) fix_waybackurls                         ;;
+       \@) install_nessus                           ;;
+       \$) remove_nessus                            ;;
+       \%) fix_waybackurls                          ;;
         *) pimpmykali_menu                          ;;    
     esac
     }
@@ -1843,6 +1837,7 @@ pimpmykali_help() {
             "--help       you're looking at it \n" \
             "--auto       for new VMs: automate pimpmykali w/ "$bold"ROOT DISABLED"$reset" \n" \
             "--auto-root  for new VMs: automate pimpmykali w/ "$bold"ROOT ENABLED"$reset" \n"
+    # ... I edited it... uwu
     exit
     }
 
@@ -1861,20 +1856,26 @@ check_arg() {
    --missing) fix_missing                      ;;
       --help) pimpmykali_help                  ;;
  --flameshot) fix_flameshot                    ;;
-     --force) force=1; fix_all $force          ;;
-    --borked) force=1; fix_sead_warning $force ;;
+     --force) force=1; 
+              fix_all $force                   ;;
+    --borked) force=1; 
+              fix_sead_warning $force          ;;
       --nmap) fix_nmap                         ;;
        --bpt) bpt                              ;;
     --vscode) install_vscode                   ;;
       --subl) install_sublime                  ;;
 #     --atom) install_atom                     ;;
    --upgrade) only_upgrade                     ;;
-   --mirrors) get_mirrorlist; best_ping; small_speedtest; large_speedtest; gen_new_sources; cleanup;;
+   --mirrors) get_mirrorlist; 
+              best_ping; 
+              small_speedtest; 
+              large_speedtest; 
+              gen_new_sources;
+              cleanup                          ;;
       --auto) hashimoto_time                   ;;
  --auto-root) hashimoto_time_spicy             ;;
 #--harvester) fix_theharvester                 ;;
-      *) pimpmykali_help ; exit 0              ;;
-
+           *) pimpmykali_help ; exit 0         ;;
     esac
     fi
     }
@@ -1886,10 +1887,7 @@ exit_screen() {
     exit
     }
 
-#check_for_root
-#check_distro
+check_for_root
+check_distro
 check_arg "$1"
-#exit_screen
-
-#pimpmykali_menu
-#pimpmykali_help
+exit_screen
