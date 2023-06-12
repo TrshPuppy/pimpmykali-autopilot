@@ -1,3 +1,30 @@
+# Pimp My Kali *Autopilot*
+This is [pimpmykali.sh](https://github.com/Dewalt-arch/pimpmykali/tree/master) made by [Dewalt](https://github.com/Dewalt-arch) and improved by me for auto install on virtual machines!
+
+## The Problem:
+- pimpmykali requires input from the user at at least 2 stages of **the first install of pmk on a virtual machine**.
+- In trying to make a VirtualBox lab for doing Hack the Box and studying for the [PNPT](https://certifications.tcm-sec.com/pnpt/) I decided to use [Vagrant](https://developer.hashicorp.com/vagrant/tutorials/getting-started/getting-started-index).
+- Vagrant automates making VMs, but pimpmykali requires keyboard input, **LAME!**
+
+## How to Use:
+If you want pimpmykali on your **NEW** VM, but don't want to wait to put in your options,
+just clone this repo, use it exactly like you would [Dewalt's version](https://github.com/Dewalt-arch/pimpmykali/tree/master) BUT NOW you can 
+automate setting up a new VM (`N` menu option in the OG version) in the following ways:
+### Giving pimpmykali a flag:
+Start pmk using either the `--auto` or `--auto-root` options:
+- `./pimpmykali.sh --auto` Will run the `N` (OG) option and choose **NOT** to enable root user in kali
+- `./pimpmykal.sh --auto-root` Will do the same but **WILL ENABLE** root user in kali
+
+### Via the Options Menu:
+If you didn't give pmk a flag at execution, you'll see the options menu.
+From here you can still automate your VM install by choosing either `#` or `#R`
+- `#` Will do everything the `N` (OG) option does but will **NOT** enable root user in kali
+- `#R` Will do everything the `N` option does but **WILL ENABLE** root user in kali
+
+## Enjoy!
+
+:------------------------------------------- START OG README.md -------------------------------------------:
+
 # pimpmykali.sh
 
 [![pmk132tkab.png](https://i.postimg.cc/Qd9VCRrd/pmk132tkab.png)](https://postimg.cc/18SyY7tk)
