@@ -4,7 +4,7 @@ This is [pimpmykali.sh](https://github.com/Dewalt-arch/pimpmykali/tree/master) m
 ## The Problem:
 - pimpmykali requires input from the user at at least 2 stages of **the first install of pmk on a virtual machine**.
 - In trying to make a VirtualBox lab for doing Hack the Box and studying for the [PNPT](https://certifications.tcm-sec.com/pnpt/) I decided to use [Vagrant](https://developer.hashicorp.com/vagrant/tutorials/getting-started/getting-started-index).
-- Vagrant automates making VMs, but pimpmykali requires keyboard input, **LAME!**
+- Vagrant automates making VMs, but pimpmykali requires keyboard input.
 
 ## How to Use:
 If you want pimpmykali on your **NEW** VM, but don't want to wait to put in your options,
