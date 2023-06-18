@@ -109,7 +109,6 @@
 
 hashimoto_time(){
   hashimoto_on=true
-  echo "I see you've chosen vanilla #-chan"
   fix_all
   fix_upgrade
 }
@@ -117,7 +116,6 @@ hashimoto_time(){
 hashimoto_time_spicy(){
   hashimoto_on=true
   hashimoto_root=true
-  echo "I see you've chosen spicey #-chan"
   fix_all
 }
 
@@ -1734,7 +1732,7 @@ pimpmykali_menu() {
     echo -e "                               (sources.list, linux-headers, vm-video)"                 # -
     echo -e "   0 - Fix ONLY 1 thru 8        (runs only 1 thru 8) \n"                                # fix_all
     echo -e "   "$bold"N - NEW VM SETUP"$reset" - Run this option if this is the first time running pimpmykali\n"
-  # TrshP wants to automate this, and make sensei #as#imoto proud:
+  # TrshP
     echo -e "  "$bold"#  - AUTOMATE NEW VM SETUP w/o ROOT"$reset" - New VM setup but WITHOUT enabling root login"
     echo -e "  "$bold"#R - AUTOMATE NEW VM SETUP w/ ROOT"$reset"  - New VM setup & enable root login (choose wisely)\n" 
     echo -e "   = - Pimpmykali-Mirrors       (find fastest kali mirror. use the equals symbol = )"   # get_mirrorlist; best_ping; small_speedtest; large_speedtest; gen_new_sources; cleanup;;
@@ -1758,7 +1756,6 @@ pimpmykali_menu() {
     echo -e "   ! - Nuke Impacket            (Type the ! character for this menu item)"              # fix_sead_warning
     echo -e "   @ - Install Nessus           (Type the @ character for this menu item)"              # install_nessus
     echo -e "   $ - Nuke Nessus              (Type the $ character for this menu item)\n"            # remove_nessus
-    # This is nice, but #as#imoto says we can do better...
     #read -n1 -p "  Press key for menu item selection or press X to exit: " menuinput
     read -p " Press key/ keypair for menu item selection or press X to exit: " menuinput
 
@@ -1837,7 +1834,6 @@ pimpmykali_help() {
             "--help       you're looking at it \n" \
             "--auto       for new VMs: automate pimpmykali w/ "$bold"ROOT DISABLED"$reset" \n" \
             "--auto-root  for new VMs: automate pimpmykali w/ "$bold"ROOT ENABLED"$reset" \n"
-    # ... I edited it... uwu
     exit
     }
 
