@@ -117,6 +117,7 @@ hashimoto_time_spicy(){
   hashimoto_on=true
   hashimoto_root=true
   fix_all
+  fix_upgrade
 }
 
 check_distro() {
