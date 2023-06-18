@@ -22,9 +22,9 @@ From here you can still automate your VM install by choosing either `#` or `#R`
 - `#R` Will do everything the `N` option does but **WILL ENABLE** root user in kali
 
 ## Enjoy!
-
+<p align="center">
 :------------------------------------------- START OG README.md -------------------------------------------:
-
+  </p>
 # pimpmykali.sh
 
 [![pmk132tkab.png](https://i.postimg.cc/Qd9VCRrd/pmk132tkab.png)](https://postimg.cc/18SyY7tk)
